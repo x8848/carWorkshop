@@ -16,13 +16,13 @@ public class WorkShopController {
 
     @PostConstruct
     private void postConstruct() {
-        repository.save(new WorkShop("wsh1", new String[]{"vw", "bmw"}, "kiev", "03123", "ua"));
-        repository.save(new WorkShop("wsh2", new String[]{"audi"}, "munich", "43242", "de"));
+        repository.save(new WorkShop("1", new String[]{"vw", "bmw"}, "kiev", "03123", "ua"));
+        repository.save(new WorkShop("2", new String[]{"audi"}, "munich", "43242", "de"));
     }
 
     @GetMapping("/workshop")
-    public List getAll() {
-        return (List) repository.findAll();
+    public List<WorkShop> getAll() {
+        return (List<WorkShop>) repository.findAll();
     }
 
     @PostMapping("/workshop")
@@ -30,13 +30,14 @@ public class WorkShopController {
         repository.save(workShop);
     }
 
-    @DeleteMapping("/workshop")
-    void delete(@RequestBody WorkShop workShop) {
-        repository.delete(workShop);
+    @GetMapping("/workshop/delete/{name}")
+    public List<WorkShop> deleteByName(@PathVariable String name) {
+        repository.deleteById(name);
+        return getAll();
     }
 
     @GetMapping("/workshop/search")
-    public List search(@RequestParam String city) {
+    public List<WorkShop> search(@RequestParam String city) {
         return repository.findByCity(city);
     }
 }

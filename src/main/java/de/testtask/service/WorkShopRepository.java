@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface WorkShopRepository extends CrudRepository<WorkShop, Long> {
+public interface WorkShopRepository extends CrudRepository<WorkShop, String> {
 
     List<WorkShop> findByCity(String city);
 
