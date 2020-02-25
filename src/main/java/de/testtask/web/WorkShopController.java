@@ -26,8 +26,8 @@ public class WorkShopController {
     }
 
     @PostMapping("/workshop")
-    public void create(@RequestBody WorkShop workShop) {
-        repository.save(workShop);
+    public WorkShop create(@RequestBody WorkShop workShop) {
+        return repository.save(workShop);
     }
 
     @GetMapping("/workshop/delete/{name}")

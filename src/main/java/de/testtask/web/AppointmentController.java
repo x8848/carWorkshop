@@ -27,8 +27,8 @@ public class AppointmentController {
     }
 
     @PostMapping("/appointment")
-    public void create(@RequestBody Appointment appointment) {
-        repository.save(appointment);
+    public Appointment create(@RequestBody Appointment appointment) {
+        return repository.save(appointment);
     }
 
     @GetMapping("/appointment/change")

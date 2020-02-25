@@ -30,15 +30,13 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public void create(@RequestBody User user) {
+    public User create(@RequestBody User user) {
         if (getAll().stream().anyMatch(exist -> user.getName().equals(exist.getName()) ||
                 user.getEmail().equals(exist.getEmail()))) {
             logger.error("Name or Email is already exists");
-        } else repository.save(user);
+            return null;
+        } else return repository.save(user);
     }
-
-//  To test error message when create user with same name or email in terminal
-//  curl -H "Content-Type: application/json" -X POST -d '{"name":"a","email":"a","city":"kiev","postalCode":"1","country":"ukraine"}' http://localhost:8080/user
 
     @GetMapping("/user/delete/{name}")
     public List<User> deleteByName(@PathVariable String name) {
