@@ -8,5 +8,4 @@ import java.util.List;
 public interface WorkShopRepository extends CrudRepository<WorkShop, String> {
 
     List<WorkShop> findByCity(String city);
-
 }

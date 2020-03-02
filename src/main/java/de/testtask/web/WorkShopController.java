@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -39,5 +40,11 @@ public class WorkShopController {
     @GetMapping("/workshop/search")
     public List<WorkShop> search(@RequestParam String city) {
         return repository.findByCity(city);
+    }
+
+    @GetMapping("/workshop/count")
+    public int search(@RequestParam String city, @RequestParam String trademark) {
+        return (int) repository.findByCity(city).stream().filter(workShop ->
+                Arrays.asList(workShop.getTradeMarks()).contains(trademark)).count();
     }
 }
